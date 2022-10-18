@@ -25,10 +25,9 @@ class DataSet:
         self.options.experimental_distribute.auto_shard_policy = tf.data.experimental.AutoShardPolicy.DATA
 
         print('Number of samples: ' + str(len(self.labels)))
-        if tile_weights:
+        if tile_weights is not None:
             print('Using tile weights.')
 
-        print('Number of parallel calls auto-tuned: ' + str(tf.data.AUTOTUNE))
 
     def create_dataset(self,
                        shuffle=True,
@@ -50,6 +49,7 @@ class DataSet:
 
         dataset = dataset.batch(batch_size, num_parallel_calls=8)
         dataset = dataset.prefetch(2)
+        print('Element spec: ' + str(dataset.element_spec))
         
         return dataset
 

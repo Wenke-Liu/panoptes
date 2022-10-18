@@ -92,7 +92,7 @@ class PANOPTES:
         x = keras.layers.Dropout(self.dropout, name='activation_dropout')(x)
 
         if self.contrastive:    # contrastive learning, first stage model built, output the activations
-            print('Contrastive learing. No classifier layers.')
+            print('Contrastive learing. No classifier layers. Projection head added.')
             out = tf.keras.layers.Dense(128, name='projection', activation='relu')(x)
         
         else:
@@ -118,8 +118,7 @@ class PANOPTES:
         print(self.model.trainable)
         print(self.model.summary())
         inputs = encoder.input
-        x = encoder.get_layer('projection').output
-        x = keras.layers.Dropout(self.dropout, name='classifier_dropout')(x)
+        x = encoder.get_layer('activation_dropout').output
         out = tf.keras.layers.Dense(self.n_classes, name='prob', activation='softmax')(x)
         self.model = keras.Model(inputs=inputs, outputs=out)
         print(self.model.trainable)
@@ -175,7 +174,6 @@ class PANOPTES:
             self.classifier_history = self.model.fit(trn_data, validation_data=val_data,    # train step
                                                      steps_per_epoch=steps,
                                                      epochs=n_epoch,
-                                                     class_weight=class_weight,
                                                      callbacks=[csv_logger, tensor_board, ckpt, early_stopping])
         
         else:
