@@ -116,15 +116,18 @@ def class_weight(label, verbose=False):
 
 def stratified_weights(df, stratify='Tumor', weighted='label', verbose=True):
     all_weights = {}
-    for level in df[stratify].unique():
-        weights = class_weight(df.loc[df[stratify] == level][weighted])
-        all_weights[level] = weights
-    
-    if verbose:
-        print(pd.DataFrame(all_weights))
-    
-    df['sample_weights'] = [all_weights[x][y] for x, y in zip(df[stratify], df[weighted])]
-    
-    return df
+        for level in df[stratify].unique():
+            if len(df.loc[df[stratify] == level][weighted].value_counts())==1:
+                weights = {0:1e-4,1:1}
+            else:
+                weights = class_weight(df.loc[df[stratify] == level][weighted])
+            all_weights[level] = weights
+        
+        if verbose:
+            print(pd.DataFrame(all_weights))
+        
+        df['sample_weights'] = [all_weights[x][y] for x, y in zip(df[stratify], df[weighted])]
+        
+        return df
 
 
