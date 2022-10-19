@@ -4,10 +4,11 @@ import numpy as np
 import tensorflow as tf
 import pandas as pd
 from math import ceil
+from utils import *
+os.environ["CUDA_VISIBLE_DEVICES"] = str(pick_gpu_lowest_memory())
 from tensorflow.keras.utils import to_categorical
 from data_input import DataSet
 from model import PANOPTES
-from utils import *
 from sklearn.manifold import TSNE
 from sklearn import metrics
 
