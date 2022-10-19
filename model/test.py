@@ -78,7 +78,7 @@ if MULTI_GPU:
     print('Number of devices: {}'.format(strategy.num_replicas_in_sync))
 
     with strategy.scope():
-        model = PANOPTES(contrastive=True)
+        model = PANOPTES(contrastive=True, dropout=0.5)
         #model.compile(loss_fn=tf.keras.losses.CategoricalCrossentropy())
 
 else:
