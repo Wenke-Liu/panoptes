@@ -160,20 +160,30 @@ def class_weight(label, verbose=False):
     return class_weight
     
 
-def stratified_weights(df, stratify='Tumor', weighted='label', verbose=True):
+def stratified_weights(df, stratify='Tumor', agg=None, weighted='label', verbose=True):
     all_weights = {}
-        for level in df[stratify].unique():
-            if len(df.loc[df[stratify] == level][weighted].value_counts())==1:
-                weights = {0:0,1:0}
-            else:
-                weights = class_weight(df.loc[df[stratify] == level][weighted])
-            all_weights[level] = weights
+    df_w = df.copy()[[stratify, weighted]]
+    if agg is not None:    # add aggregation factor
+        df_w[agg] = df[agg]
+
+    for level in df_w[stratify].unique():
+        df_w_level = df_w.loc[df_w[stratify] == level]
+        if len(df_w_level[weighted].value_counts())==1:    # only have one outcome
+            weights = {0:0,1:0}
+        else:
+            if agg is not None:    # aggregate and then calculate weights
+                raw_label = df_w_level.groupby(agg)[weighted].agg('mean')
+            else:    # weights on instance level
+                raw_label = df_w_level[weighted]
+            weights = class_weight(raw_label)
         
-        if verbose:
-            print(pd.DataFrame(all_weights))
+        all_weights[level] = weights
         
-        df['sample_weights'] = [all_weights[x][y] for x, y in zip(df[stratify], df[weighted])]
+    if verbose:
+        print(pd.DataFrame(all_weights))
         
-        return df
+    df['sample_weights'] = [all_weights[x][y] for x, y in zip(df[stratify], df[weighted])]
+        
+    return df
 
 
