@@ -145,12 +145,18 @@ def save_idx_df(out_dir, idx_df, fn):
 
 
 def class_weight(label, verbose=False):
-    neg, pos = np.bincount(label)
-    total = neg + pos
+    # neg, pos = np.bincount(label)
+    # total = neg + pos
     
-    weight_for_0 = (1 / neg) * (total / 2.0)
-    weight_for_1 = (1 / pos) * (total / 2.0)
-    class_weight = {0: weight_for_0, 1: weight_for_1}
+    # weight_for_0 = (1 / neg) * (total / 2.0)
+    # weight_for_1 = (1 / pos) * (total / 2.0)
+    # class_weight = {0: weight_for_0, 1: weight_for_1}
+
+    freq = np.bincount(label)
+    total = np.sum(freq)
+    class_weight = (1/freq)*(total/len(freq))
+    class_weight = dict(zip(list(range(0,len(freq))),class_weight))
+
     if verbose:
         print('Training examples:\n    Total: {}\n    Positive: {} ({:.2f}% of total)\n'.format(
                total, pos, 100 * pos / total))
@@ -169,7 +175,8 @@ def stratified_weights(df, stratify='Tumor', agg=None, weighted='label', verbose
     for level in df_w[stratify].unique():
         df_w_level = df_w.loc[df_w[stratify] == level]
         if len(df_w_level[weighted].value_counts())==1:    # only have one outcome
-            weights = {0:0,1:0}
+            # weights = {0:0,1:0}
+            weights = dict(zip(list(range(0,len(df_w['label'].unique()))),[0]*len(df_w['label'].unique())))
         else:
             if agg is not None:    # aggregate and then calculate weights
                 raw_label = df_w_level.groupby(agg)[weighted].agg('mean')
