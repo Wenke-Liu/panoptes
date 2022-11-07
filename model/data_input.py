@@ -10,7 +10,8 @@ class DataSet:
                  tile_weights=None,
                  id_level=3,
                  img_size=299,
-                 sym=True
+                 sym=True,
+                 legacy=False
                  ):
         self.filenames = np.asarray(filenames)
         self.id_level = id_level
@@ -21,7 +22,8 @@ class DataSet:
         self.img_size = img_size
         self.sym = sym
         self.options = tf.data.Options()
-        
+        self.legacy = legacy
+
         self.options.experimental_distribute.auto_shard_policy = tf.data.experimental.AutoShardPolicy.DATA
 
         print('Number of samples: ' + str(len(self.labels)))
@@ -59,7 +61,12 @@ class DataSet:
         def read(fn):
             im_string = tf.io.read_file(fn)
             im = tf.image.decode_png(im_string, channels=3)
-            im = tf.image.convert_image_dtype(im, tf.float32)
+
+            if self.legacy:
+                im = tf.reverse(im,axis=[-1])
+                im = tf.cast(im,tf.float32) #maintains [0, 255)
+            else:
+                im = tf.image.convert_image_dtype(im, tf.float32) #will be changed to [0, 1)
             return im
 
         image1 = read(filename1)
@@ -88,14 +95,15 @@ class DataSet:
             image2 = augment(image2)
             image3 = augment(image3)
 
-        image1 = clip_and_resize(image1)
-        image2 = clip_and_resize(image2)
-        image3 = clip_and_resize(image3)
+        if self.legacy==False:
+            image1 = clip_and_resize(image1)
+            image2 = clip_and_resize(image2)
+            image3 = clip_and_resize(image3)
 
-        if self.sym:
-            image1 = image1 * 2 - 1
-            image2 = image2 * 2 - 1
-            image3 = image3 * 2 - 1
+            if self.sym:
+                image1 = image1 * 2 - 1
+                image2 = image2 * 2 - 1
+                image3 = image3 * 2 - 1
 
         if self.tile_weights is not None:
 
