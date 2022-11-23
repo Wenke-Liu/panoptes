@@ -56,7 +56,22 @@ Models are trained from scratch and performance evaluated on the test set previo
 
 For training, Panoptes supports adding a contrastive pre-training step prior to training the classifier:  
   - If the ```--contrastive``` flag is passed to main.py, then a nonlinear 128-dim projection head is attached to the top of the encoder, and first pre-trained to optimize the contrastive loss. Thereafter, the projection head is removed and replaced with a Dense prediction layer with size corresponding to the number of class outcomes. The weights of the previously pre-trained encoder are not frozen during training of the prediction layer.
-  - By default, not passing the ```--contrastive``` will only train a classification with no contrastive pre-training. 
+  - By default, not passing the ```--contrastive``` will only train a classification with no contrastive pre-training.    
+
+Panoptes will automatically create the following files within each directory at ```--OUT_DIR```:
+
+- data   
+  \*_slide_idx.csv and \*_tile_idx.csv where \* indicates trn, val, and tst for the trainig, validation, and test splits created earlier.   
+- log  
+  If ```--contrastive``` is enabled, then pre_trn_history_logs.csv will contain the loss values, while tensorboard-compatible viewing is available within pre_trn_tb_logs. Similarly, trn_history_logs.csv and trn_tb_logs contain information for the classification training.  
+- model  
+  Final model weights are saved as "panoptes_weights_final.h5" and intermediary checkpoints within ckpt directory.  
+- pred  
+  Predictions for each individual slide and aggregated at the slide level are saved as tst_tile_pred.csv and tst_slide_pred.csv respectively. Coordinates of the tsne clustering are saved in tSNE_P_N.csv.
+  
+
+#### Step 3: Reloading a trained model for external test. 
+
 
 
 
