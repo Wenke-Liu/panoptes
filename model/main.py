@@ -12,17 +12,31 @@ from model import PANOPTES
 from sklearn.manifold import TSNE
 from sklearn import metrics
 
-MULTI_GPU = False
+import argparse
+parser = argparse.ArgumentParser()
 
+parser.add_argument('--OUT_DIR',type=str,default='./results/tp53_test_221018') 
+parser.add_argument('--VAL_SAMPLE',type=int,default=10000)
+parser.add_argument('--MANIFOLD_SAMPLE',type=int,default=20000)
+parser.add_argument('--BATCH_SIZE',type=int,default=16)
+parser.add_argument('--STEPS',type=int,default=10000)
+parser.add_argument('--MAX_EPOCH',type=int,default=20)
+parser.add_argument('--PATIENCE',type=int,default=2)
+parser.add_argument('--SEED',type=int,default=221018)
+parser.add_argument('--MULTI_GPU',action='store_true')
 
-OUT_DIR = './results/tp53_test_221018'
-VAL_SAMPLE = 10000
-MANIFOLD_SAMPLE = 20000
-BATCH_SIZE = 16
-STEPS = 10000
-MAX_EPOCH = 20
-PATIENCE = 2
-SEED = 221018
+args = parser.parse_args()
+
+OUT_DIR = args.OUT_DIR
+VAL_SAMPLE = args.VAL_SAMPLE
+MANIFOLD_SAMPLE = args.MANIFOLD_SAMPLE
+BATCH_SIZE = args.BATCH_SIZE
+STEPS = args.STEPS
+MAX_EPOCH = args.MAX_EPOCH
+PATIENCE = args.PATIENCE
+SEED = args.SEED
+
+MULTI_GPU = args.MULTI_GPU
 
 print('Experiment random seed: ' + str(SEED))
 np.random.seed(SEED)
