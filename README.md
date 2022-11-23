@@ -23,10 +23,38 @@ The training, validation, and test splits should be formatted prior to model tra
 | L2path  | The file path to the 5x tile.   |
 | L3path  | The file path to the 2.5x tile.    |
 
-
+<br />
 
 #### Step 2: Training and evaluation. 
-Models are trained from scratch and performance evaluated on the test set previously defined in Step 1. For training, Panoptes supports adding a contrastive pre-training step prior to training the classifier:  
+Models are trained from scratch and performance evaluated on the test set previously defined in Step 1. A description of the accepted parameters are as follows:
+- ```--OUT_DIR```   
+  Path to the directory for all output and intermediary log files.   
+- ```--trn_df```   
+  Path to the previously created table of training tile pairs.   
+- ```--val_df```   
+  Path to the previously created table of validation tile pairs.     
+- ```--tst_df```   
+  Path to the previously created table of testing tile pairs.    
+- ```--contrastive```   
+  Add this flag to pretrain the model with contrastive loss prior to training the classifier head.  
+- ```--VAL_SAMPLE```   
+  The number of validation samples that will be selected for intermediary model evaluation to determine early stopping. 
+- ```--MANIFOLD_SAMPLE```   
+  The number of test tile pairs that will be sampled for TSNE visualization.  
+- ```--BATCH_SIZE```   
+  The number of test tile pairs in each batch of training data. 
+- ```--STEPS```   
+  The number of steps to train prior to model evaluation on the validation subset. Each step is the size of one batch. 
+- ```--MAX_EPOCH```   
+  The maximun number of epochs to train for. Each epoch is the size of the number of steps previously defined.  
+- ```--PATIENCE```   
+  The number of epochs to wait for validation loss to decrease before early stop of training.   
+- ```--SEED```   
+  The seed used to determine the subsetting of validation and test samples - added to improve replicability.   
+- ```--MULTI_GPU```   
+  Include this flag for training across multi-GPU devices.  
+
+For training, Panoptes supports adding a contrastive pre-training step prior to training the classifier:  
   - If the ```--contrastive``` flag is passed to main.py, then a nonlinear 128-dim projection head is attached to the top of the encoder, and first pre-trained to optimize the contrastive loss. Thereafter, the projection head is removed and replaced with a Dense prediction layer with size corresponding to the number of class outcomes. The weights of the previously pre-trained encoder are not frozen during training of the prediction layer.
   - By default, not passing the ```--contrastive``` will only train a classification with no contrastive pre-training. 
 
