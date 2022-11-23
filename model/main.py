@@ -16,6 +16,9 @@ import argparse
 parser = argparse.ArgumentParser()
 
 parser.add_argument('--OUT_DIR',type=str,default='./results/tp53_test_221018') 
+parser.add_argument('--trn_df',type=str,default='idx_files/tp53/tr_sample.csv') 
+parser.add_argument('--val_df',type=str,default='idx_files/tp53/va_sample.csv') 
+parser.add_argument('--tst_df',type=str,default='idx_files/tp53/te_sample.csv') 
 parser.add_argument('--VAL_SAMPLE',type=int,default=10000)
 parser.add_argument('--MANIFOLD_SAMPLE',type=int,default=20000)
 parser.add_argument('--BATCH_SIZE',type=int,default=16)
@@ -52,7 +55,7 @@ except FileExistsError:
     pass
 
 
-trn_df = pd.read_csv('idx_files/tp53/tr_sample.csv')
+trn_df = pd.read_csv(args.trn_df)
 #trn_df = trn_df.sample(n=2000, random_state=VAL_SEED)    # sample
 save_idx_df(out_dir=OUT_DIR + '/data', idx_df=trn_df, fn='trn')
 
@@ -63,12 +66,12 @@ print('Number of training examples: ' + str(trn_df.shape[0]))
 MAX_STEPS = ceil(trn_df.shape[0]/BATCH_SIZE)
 print('Maximum steps per epoch: ' + str(MAX_STEPS))
 
-val_df = pd.read_csv('idx_files/tp53/va_sample.csv')
+val_df = pd.read_csv(args.val_df)
 val_df = val_df.sample(n=VAL_SAMPLE, random_state=VAL_SEED)    # sample
 val_df['sample_weights'] = 1  # unweighted
 save_idx_df(out_dir=OUT_DIR + '/data', idx_df=val_df, fn='val')
 
-tst_df = pd.read_csv('idx_files/tp53/te_sample.csv')
+tst_df = pd.read_csv(args.tst_df)
 #tst_df = tst_df.sample(n=VAL_SAMPLE, random_state=TST_SEED)    # sample
 tst_df['sample_weights'] = 1  # unweighted
 save_idx_df(out_dir=OUT_DIR + '/data', idx_df=tst_df, fn='tst')
