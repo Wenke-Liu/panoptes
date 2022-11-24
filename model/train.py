@@ -19,7 +19,9 @@ parser.add_argument('--OUT_DIR',type=str,default='./results/tp53_test_221018')
 parser.add_argument('--trn_df',type=str,default='idx_files/tp53/tr_sample.csv') 
 parser.add_argument('--val_df',type=str,default='idx_files/tp53/va_sample.csv') 
 parser.add_argument('--tst_df',type=str,default='idx_files/tp53/te_sample.csv') 
+
 parser.add_argument('--contrastive',action='store_true')
+parser.add_argument('--num_classes',type=int,default=2)
 
 parser.add_argument('--VAL_SAMPLE',type=int,default=10000)
 parser.add_argument('--MANIFOLD_SAMPLE',type=int,default=20000)
@@ -98,7 +100,7 @@ if MULTI_GPU:
     print('Number of devices: {}'.format(strategy.num_replicas_in_sync))
 
     with strategy.scope():
-        model = PANOPTES(contrastive=args.contrastive, dropout=0.5)
+        model = PANOPTES(contrastive=args.contrastive, dropout=0.5, n_classes=args.num_classes)
         #model.compile(loss_fn=tf.keras.losses.CategoricalCrossentropy())
 
 else:
