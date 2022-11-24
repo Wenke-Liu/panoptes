@@ -26,7 +26,8 @@ The training, validation, and test splits should be formatted prior to model tra
 <br />
 
 #### Step 2: Training and evaluation. 
-Models are trained from scratch and performance evaluated on the test set previously defined in Step 1. A description of the accepted parameters are as follows:
+Models are trained from scratch and performance evaluated on the test set previously defined in Step 1 using ```train.py```.  
+A description of the accepted parameters are as follows:
 - ```--OUT_DIR```   
   Path to the directory for all output and intermediary log files.   
 - ```--trn_df```   
@@ -37,6 +38,8 @@ Models are trained from scratch and performance evaluated on the test set previo
   Path to the previously created table of testing tile pairs.    
 - ```--contrastive```   
   Add this flag to pretrain the model with contrastive loss prior to training the classifier head.  
+- ```--num_classes```   
+  Specify the number of outcome classes for prediction - will only affected the Dense prediction layer in the classifier head.  
 - ```--VAL_SAMPLE```   
   The number of validation samples that will be selected for intermediary model evaluation to determine early stopping. 
 - ```--MANIFOLD_SAMPLE```   
@@ -69,8 +72,13 @@ Panoptes will automatically create the following files within each directory at 
 - pred  
   Predictions for each individual slide and aggregated at the slide level are saved as tst_tile_pred.csv and tst_slide_pred.csv respectively. Coordinates of the tsne clustering are saved in tSNE_P_N.csv.
   
+<br />
 
-#### Step 3: Reloading a trained model for external test. 
+#### Step 3: Reloading a trained model for external test.  
+Models can be reloaded back into the environment for testing on a different dataset using ```test.py```.  
+A description of the accepted parameters are as follows:
+
+
 
 
 
