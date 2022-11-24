@@ -29,7 +29,7 @@ The training, validation, and test splits should be formatted prior to model tra
 Models are trained from scratch and performance evaluated on the test set previously defined in Step 1 using ```train.py```.  
 A description of the accepted parameters are as follows:
 - ```--OUT_DIR```   
-  Path to the directory for all output and intermediary log files.   
+  Path to the directory for all output and intermediary log files. Do not append "/" to this path.    
 - ```--trn_df```   
   Path to the previously created table of training tile pairs.   
 - ```--val_df```   
@@ -76,8 +76,31 @@ Panoptes will automatically create the following files within each directory at 
 
 #### Step 3: Reloading a trained model for external test.  
 Models can be reloaded back into the environment for testing on a different dataset using ```test.py```.  
-A description of the accepted parameters are as follows:
+A description of the accepted parameters are as follows:  
+- ```--OUT_DIR```   
+  Path to the directory for all output and intermediary log files. Do not append "/" to this path.   
+- ```--MODEL_WEIGHTS```   
+  File path to the previously created .h5 weights file, or any other .h5 weights file created in Step 2.   
+- ```--num_classes```   
+  The number of outcome classes that was originally used to train the above model.  
+- ```--tst_df```   
+  Path for the external test dataset.  
 
+The following pre-trained models used in our publication can be downloaded and loaded into Step 3:  
+| Model Outcome  | num_classes | link |
+| ------------- | ------------- | ------------- |
+| Normal vs. Tumor  | 2 (Normal, Tumor)  |  url |  
+| Tissue-of-Origin  | 6 (CCRCC, HNSCC, LSCC, LUAD, PDA, UCEC)  |  url |  
+| Grade  | 5 (Normal, 1, 2, 3, 4)  |  url |  
+| Stage  | 5 (Normal, 1, 2, 3, 4)  |  url |  
+| Tumor Nuclei  | 3 (Low, Medium, High)  |  url |  
+| Tumor Cellularity  | 3 (Low, Medium, High)  |  url |  
+| Percent Necrosis  | 3 (Low, Medium, High)  |  url |  
+| TP53  | 2 (Wild-type, Mutated)   |  url |  
+| EGFR  |  2 (Wild-type, Mutated)   |  url |  
+| KRAS  |  2 (Wild-type, Mutated)   |  url |  
+| PTEN  |  2 (Wild-type, Mutated)   |  url |  
+| STK11  |  2 (Wild-type, Mutated)   |  url |    
 
 
 
