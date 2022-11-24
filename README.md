@@ -102,6 +102,11 @@ The following pre-trained models used in our publication can be downloaded and l
 | PTEN  |  2 (Wild-type, Mutated)   |  [Google Drive](https://drive.google.com/file/d/19SD8umCXbFxxehHR7jXTwbbn1k2Nurmt/view?usp=share_link) |  
 | STK11  |  2 (Wild-type, Mutated)   |  [Google Drive](https://drive.google.com/file/d/19XJS32XQLzCbZow7jn7Pyhl21OpM17QS/view?usp=share_link) |    
 
+The following files will be created at ```--OUT_DIR```:  
+- test_preds_tile.csv: prediction values for each tile in tst_df.  
+- test_latent_tile.csv: latent vectors for each tile in tst_df.  
+- test_preds_image.csv: prediction values averaged for each slide's tile.  
+
 
 
 
