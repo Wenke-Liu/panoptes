@@ -89,18 +89,18 @@ A description of the accepted parameters are as follows:
 The following pre-trained models used in our publication can be downloaded and loaded into Step 3:  
 | Model Outcome  | num_classes | link |
 | ------------- | ------------- | ------------- |
-| Normal vs. Tumor  | 2 (Normal, Tumor)  |  url |  
-| Tissue-of-Origin  | 6 (CCRCC, HNSCC, LSCC, LUAD, PDA, UCEC)  |  url |  
-| Grade  | 5 (Normal, 1, 2, 3, 4)  |  url |  
-| Stage  | 5 (Normal, 1, 2, 3, 4)  |  url |  
-| Tumor Nuclei  | 3 (Low, Medium, High)  |  url |  
-| Tumor Cellularity  | 3 (Low, Medium, High)  |  url |  
-| Percent Necrosis  | 3 (Low, Medium, High)  |  url |  
-| TP53  | 2 (Wild-type, Mutated)   |  url |  
-| EGFR  |  2 (Wild-type, Mutated)   |  url |  
-| KRAS  |  2 (Wild-type, Mutated)   |  url |  
-| PTEN  |  2 (Wild-type, Mutated)   |  url |  
-| STK11  |  2 (Wild-type, Mutated)   |  url |    
+| Normal vs. Tumor  | 2 (Normal, Tumor)  |  [Google Drive](https://drive.google.com/file/d/19ovu1oMGvscNpo-PGaYQ6DcAA_J8hXVe/view?usp=share_link) |  
+| Tissue-of-Origin  | 6 (CCRCC, HNSCC, LSCC, LUAD, PDA, UCEC)  |  [Google Drive](https://drive.google.com/file/d/19hemZ8OukAsKBZrLelzzp-c8AIbJ_Uc3/view?usp=share_link) |  
+| Grade  | 5 (Normal, 1, 2, 3, 4)  |  [Google Drive](https://drive.google.com/file/d/19Zp98zQBK7P5NdVUBg6R38M2_CfgJ3oV/view?usp=share_link) |  
+| Stage  | 5 (Normal, 1, 2, 3, 4)  |  [Google Drive](https://drive.google.com/file/d/19iuT0Q3Y9DHjGmgR-E2K3gLPdqy1tkP6/view?usp=share_link) |  
+| Percent Tumor Nuclei  | 3 (Low, Medium, High)  |  [Google Drive](https://drive.google.com/file/d/19h_A_8f9BWUJhOCdOhJtffawtoTN9SwR/view?usp=share_link) |  
+| Percent Tumor Cellularity  | 3 (Low, Medium, High)  |  [Google Drive](https://drive.google.com/file/d/19ah6omW-8dTLXE9d49FmnH3fh4UDZXf6/view?usp=share_link) |  
+| Percent Necrosis  | 3 (Low, Medium, High)  |  [Google Drive](https://drive.google.com/file/d/19gT9an4faSPAPOiXvIchLwkkFYH_jeyQ/view?usp=share_link) |  
+| TP53  | 2 (Wild-type, Mutated)   |  [Google Drive](https://drive.google.com/file/d/19VAZFkQLGJqhOTuzZTIjrXS5B7vBvX-8/view?usp=share_link) |  
+| EGFR  |  2 (Wild-type, Mutated)   |  [Google Drive](https://drive.google.com/file/d/19Pn0pFAQ22LBd-w0h5oFiPo7ARa7LB8k/view?usp=share_link) |  
+| KRAS  |  2 (Wild-type, Mutated)   |  [Google Drive](x) |  
+| PTEN  |  2 (Wild-type, Mutated)   |  [Google Drive](https://drive.google.com/file/d/19SD8umCXbFxxehHR7jXTwbbn1k2Nurmt/view?usp=share_link) |  
+| STK11  |  2 (Wild-type, Mutated)   |  [Google Drive](https://drive.google.com/file/d/19XJS32XQLzCbZow7jn7Pyhl21OpM17QS/view?usp=share_link) |    
 
 
 
