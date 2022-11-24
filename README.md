@@ -91,8 +91,8 @@ The following pre-trained models used in our publication can be downloaded and l
 | ------------- | ------------- | ------------- |
 | Normal vs. Tumor  | 2 (Normal, Tumor)  |  [Google Drive](https://drive.google.com/file/d/19ovu1oMGvscNpo-PGaYQ6DcAA_J8hXVe/view?usp=share_link) |  
 | Tissue-of-Origin  | 6 (CCRCC, HNSCC, LSCC, LUAD, PDA, UCEC)  |  [Google Drive](https://drive.google.com/file/d/19hemZ8OukAsKBZrLelzzp-c8AIbJ_Uc3/view?usp=share_link) |  
-| Grade  | 5 (Normal, 1, 2, 3, 4)  |  [Google Drive](https://drive.google.com/file/d/19Zp98zQBK7P5NdVUBg6R38M2_CfgJ3oV/view?usp=share_link) |  
-| Stage  | 5 (Normal, 1, 2, 3, 4)  |  [Google Drive](https://drive.google.com/file/d/19iuT0Q3Y9DHjGmgR-E2K3gLPdqy1tkP6/view?usp=share_link) |  
+| Clinical Grade  | 5 (Normal, 1, 2, 3, 4)  |  [Google Drive](https://drive.google.com/file/d/19Zp98zQBK7P5NdVUBg6R38M2_CfgJ3oV/view?usp=share_link) |  
+| Clinical Stage  | 5 (Normal, 1, 2, 3, 4)  |  [Google Drive](https://drive.google.com/file/d/19iuT0Q3Y9DHjGmgR-E2K3gLPdqy1tkP6/view?usp=share_link) |  
 | Percent Tumor Nuclei  | 3 (Low, Medium, High)  |  [Google Drive](https://drive.google.com/file/d/19h_A_8f9BWUJhOCdOhJtffawtoTN9SwR/view?usp=share_link) |  
 | Percent Tumor Cellularity  | 3 (Low, Medium, High)  |  [Google Drive](https://drive.google.com/file/d/19ah6omW-8dTLXE9d49FmnH3fh4UDZXf6/view?usp=share_link) |  
 | Percent Necrosis  | 3 (Low, Medium, High)  |  [Google Drive](https://drive.google.com/file/d/19gT9an4faSPAPOiXvIchLwkkFYH_jeyQ/view?usp=share_link) |  
