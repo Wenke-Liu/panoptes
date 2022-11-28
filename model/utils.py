@@ -144,34 +144,22 @@ def save_idx_df(out_dir, idx_df, fn):
     slide_idx_df.to_csv(out_dir + '/' + fn + '_slide_idx.csv', index=False)
 
 
-def class_weight(label, verbose=False):
-    # neg, pos = np.bincount(label)
-    # total = neg + pos
-    
-    # weight_for_0 = (1 / neg) * (total / 2.0)
-    # weight_for_1 = (1 / pos) * (total / 2.0)
-    # class_weight = {0: weight_for_0, 1: weight_for_1}
-
+def class_weight(label, power=1./3):
     freq = np.bincount(label)
     total = np.sum(freq)
-    class_weight = (1/freq)*(total/len(freq))
+    class_weight = ((1/freq)*(total/len(freq))) ** power
     class_weight = dict(zip(list(range(0,len(freq))),class_weight))
-
-    if verbose:
-        print('Training examples:\n    Total: {}\n    Positive: {} ({:.2f}% of total)\n'.format(
-               total, pos, 100 * pos / total))
-        print('Weight for class 0: {:.2f}'.format(weight_for_0))
-        print('Weight for class 1: {:.2f}'.format(weight_for_1))
     
     return class_weight
     
 
-def stratified_weights(df, stratify='Tumor', agg=None, weighted='label', verbose=True):
+def stratified_weights(df, stratify='Tumor', agg=None, weighted='label', power=1./3, verbose=True):
     all_weights = {}
     df_w = df.copy()[[stratify, weighted]]
     if agg is not None:    # add aggregation factor
         df_w[agg] = df[agg]
-
+    
+    print('Power of weights: ' + str(power))
     for level in df_w[stratify].unique():
         df_w_level = df_w.loc[df_w[stratify] == level]
         if len(df_w_level[weighted].value_counts())==1:    # only have one outcome
