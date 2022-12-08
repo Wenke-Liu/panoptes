@@ -83,7 +83,7 @@ In contrast, to run the exact same settings above without contrastive pretrainin
 
 <br />
 
-Step 3: Reloading a trained model for external test.  
+Step 3: Reload a trained model for external test.  
 ------
 
 Models can be reloaded back into the environment for testing on a different dataset using ```test.py```.  
