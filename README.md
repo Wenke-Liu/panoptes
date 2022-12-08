@@ -25,7 +25,7 @@ The training, validation, and test splits should be formatted prior to model tra
 
 <br />
 
-### Step 2: Training and evaluation. 
+### Step 2: Training and Validation. 
 Models are trained from scratch and performance evaluated on the test set previously defined in Step 1 using ```train.py```.  
 A description of the accepted parameters are as follows:
 ```
