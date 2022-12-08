@@ -80,14 +80,13 @@ In contrast, to run the exact same settings above without contrastive pretrainin
 ### Step 3: Reloading a trained model for external test.  
 Models can be reloaded back into the environment for testing on a different dataset using ```test.py```.  
 A description of the accepted parameters are as follows:  
-- ```--OUT_DIR```   
-  Path to the directory for all output and intermediary log files. Do not append "/" to this path.   
-- ```--MODEL_WEIGHTS```   
-  File path to the previously created .h5 weights file, or any other .h5 weights file created in Step 2.   
-- ```--num_classes```   
-  The number of outcome classes that was originally used to train the above model.  
-- ```--tst_df```   
-  Path for the external test dataset.  
+```
+Usage: python test.py [OPTIONS]. 
+  --OUT_DIR         Path to the directory for all output and intermediary log files. Do not append "/" to this path.   
+  --MODEL_WEIGHTS   File path to the previously created .h5 weights file, or any other .h5 weights file created in Step 2.   
+  --num_classes     The number of outcome classes that was originally used to train the above model.  
+  --tst_df          Path for the external test dataset.  
+```      
 
 The following pre-trained models used in our publication can be downloaded and loaded into Step 3:  
 | Model Outcome  | num_classes | link |
@@ -110,7 +109,16 @@ The following files will be created at ```--OUT_DIR```:
 - test_latent_tile.csv: latent vectors for each tile in tst_df.  
 - test_preds_image.csv: prediction values averaged for each slide's tile.  
 
+### Examples:   
+To import your model and test on the example tst_df.csv:  
+```python test.py --MODEL_WEIGHTS your_model_weights.h5 --num_classes 2 --tst_df examples/tst_df.csv```   
 
+Alternatively, to use our model (ex. normal vs. tumor) on the example tst_df.csv:        
+```
+Download the above Normal vs. Tumor model from the Google Drive link, then:  
+python test.py --MODEL_WEIGHTS tumor_CCA_weights_converted.h5 --num_classes 2 --tst_df examples/tst_df.csv
+```
+   
 
 
 
