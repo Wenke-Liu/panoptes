@@ -12,7 +12,22 @@ git clone https://github.com/Wenke-Liu/panoptes.git
 conda create conda env create -f environment.yml
 ```
 
-Step 1: Format your training, validation, and test splits. 
+Step 1: Tile the image.
+------
+Images are tiled at the 10x, 5x, and 2.5x magnification, and color normalized using Vahadane's spatial preserving color normalization to a standard tile image. Directories should be created for each patient, with every image from the same patient deposited into that folder.
+To tile the sample image provided:      
+```    
+mkdir examples/tiles    
+python Cutter2.py --prefix examples/images/C3L-00604 --colorStandard model/colorStandard.png --tileOutput examples/tiles    
+```     
+Within tiles, a new image directory will be created with that directory's patient name (in this case, C3L-00604-22). Within each image directory, three folders will contain the 10x, 5x, and 2.5x tiles (level1, level2, and level3 respectively). To pair these resolutions together, run the next script:  
+```         
+python mergeTiles.py --tree examples/tiles --output examples/output.csv      
+```      
+
+
+
+Step 2: Format your training, validation, and test splits. 
 ------
 
 The training, validation, and test splits should be formatted prior to model training/evaluation. We do not use tfrecords in this implementation, and instead read tiles directly from png files. All rows should be shuffled prior to the next step. Each row represents a single paired instance of a 10x, 5x, and 2.5x tile. Each file should contain the following columns:
@@ -29,7 +44,7 @@ The training, validation, and test splits should be formatted prior to model tra
 
 <br />
 
-Step 2: Training and Validation. 
+Step 3: Training and Validation. 
 ------
 
 Models are trained from scratch and performance evaluated on the test set previously defined in Step 1 using ```train.py```.  
@@ -83,7 +98,7 @@ In contrast, to run the exact same settings above without contrastive pretrainin
 
 <br />
 
-Step 3: Reload a trained model for external test.  
+Step 4: Reload a trained model for external test.  
 ------
 
 Models can be reloaded back into the environment for testing on a different dataset using ```test.py```.  
