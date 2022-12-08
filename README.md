@@ -3,14 +3,18 @@ This is a re-implementation of the original [Panoptes](https://github.com/rhong3
 
 <br />
 
-### Step 0: Creating the environment.
+Step 0: Creating the environment.
+------
+
 Clone the github repository and install the required python libraries/binaries into your local environment:
 ```
 git clone https://github.com/Wenke-Liu/panoptes.git
 conda create conda env create -f environment.yml
 ```
 
-### Step 1: Format your training, validation, and test splits. 
+Step 1: Format your training, validation, and test splits. 
+------
+
 The training, validation, and test splits should be formatted prior to model training/evaluation. We do not use tfrecords in this implementation, and instead read tiles directly from png files. All rows should be shuffled prior to the next step. Each row represents a single paired instance of a 10x, 5x, and 2.5x tile. Each file should contain the following columns:
 
 | Column Name  | Description |
@@ -25,7 +29,9 @@ The training, validation, and test splits should be formatted prior to model tra
 
 <br />
 
-### Step 2: Training and Validation. 
+Step 2: Training and Validation. 
+------
+
 Models are trained from scratch and performance evaluated on the test set previously defined in Step 1 using ```train.py```.  
 A description of the accepted parameters are as follows:
 ```
@@ -77,7 +83,9 @@ In contrast, to run the exact same settings above without contrastive pretrainin
 
 <br />
 
-### Step 3: Reloading a trained model for external test.  
+Step 3: Reloading a trained model for external test.  
+------
+
 Models can be reloaded back into the environment for testing on a different dataset using ```test.py```.  
 A description of the accepted parameters are as follows:  
 ```
@@ -118,9 +126,4 @@ Alternatively, to use our model (ex. normal vs. tumor) on the example tst_df.csv
 Download the above Normal vs. Tumor model from the Google Drive link, then:  
 python test.py --MODEL_WEIGHTS tumor_CCA_weights_converted.h5 --num_classes 2 --tst_df examples/tst_df.csv
 ```
-   
-
-
-
-
 
