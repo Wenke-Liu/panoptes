@@ -15,7 +15,6 @@ import pandas as pd
 import multiprocessing as mp
 import staintools
 from PIL import Image
-import PIL
 
 
 # check if a tile is background or not; return a blank pixel percentage score
