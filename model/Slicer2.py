@@ -63,14 +63,17 @@ def v_slide(slp, n_y, x, y, tile_size, stepsize, x0, outdir, level, dp, std):
         wscore = bgcheck(img, tile_size)
         if wscore < 0.8:
             img = img.resize((299, 299))
-            img = normalization(img, std)
-            if dp:
-                img.save(outdir + "/region_x-{}-y-{}_{}.png".format(image_x, image_y, str(dp)))
-                strr = outdir + "/region_x-{}-y-{}_{}.png".format(image_x, image_y, str(dp))
-            else:
-                img.save(outdir + "/region_x-{}-y-{}.png".format(image_x, image_y))
-                strr = outdir + "/region_x-{}-y-{}.png".format(image_x, image_y)
-            imloc.append([x0, y0, image_x, image_y, strr])
+            try:
+                img = normalization(img, std)
+                if dp:
+                    img.save(outdir + "/region_x-{}-y-{}_{}.png".format(image_x, image_y, str(dp)))
+                    strr = outdir + "/region_x-{}-y-{}_{}.png".format(image_x, image_y, str(dp))
+                else:
+                    img.save(outdir + "/region_x-{}-y-{}.png".format(image_x, image_y))
+                    strr = outdir + "/region_x-{}-y-{}.png".format(image_x, image_y)
+                imloc.append([x0, y0, image_x, image_y, strr])
+            except(staintools.miscellaneous.exceptions.TissueMaskException):
+                pass
         y0 += 1
     slide.close()
     return imloc
